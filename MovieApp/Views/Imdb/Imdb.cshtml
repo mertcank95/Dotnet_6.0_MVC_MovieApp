@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "IMDb";
+}
+
+<h1>IMDb Data</h1>
+
+<form method="get" action="@Url.Action("MovieData", "Imdb")">
+  <div class="row">
+    <div class="col-md-8">
+        <div class="input-group">
+            <label for="movieName" class="input-group-text">Movie Name:</label>
+            <input type="text" id="movieName" name="movieName" class="form-control" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+</div>
+</form>
+
+@if (ViewBag.MovieDataList != null && ViewBag.MovieDataList.Count > 0)
+{
+    <h2>Movie List</h2>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Year</th>
+                    <th>IMDb ID</th>
+                    <th>Type</th>
+                    <th>Poster</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var movie in ViewBag.MovieDataList)
+                {
+                    <tr>
+                        <td>@movie.Title</td>
+                        <td>@movie.Year</td>
+                        <td>@movie.ImdbID</td>
+                        <td>@movie.Type</td>
+                        <td><img src="@movie.Poster" alt="Movie Poster" width="100" height="150" /></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

@@ -1,0 +1,33 @@
+﻿@if (Model != null && Model.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Content</th>
+                <th>Created At</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var post in Model)
+            {
+                <tr>
+                    <td>@post.Title</td>
+                    <td>@post.Content</td>
+                    <td>@post.CreatedAt</td>
+                    <td>
+                        <form method="post" action="@Url.Action("DeletePost", "Post")">
+                            <input type="hidden" name="postId" value="@post.PostId" />
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No posts available.</p>
+}
